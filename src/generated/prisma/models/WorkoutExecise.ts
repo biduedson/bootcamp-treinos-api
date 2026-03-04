@@ -509,14 +509,6 @@ export type WorkoutExeciseUncheckedUpdateManyWithoutWorkoutDayNestedInput = {
   deleteMany?: Prisma.WorkoutExeciseScalarWhereInput | Prisma.WorkoutExeciseScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type WorkoutExeciseCreateWithoutWorkoutDayInput = {
   id?: string
   name: string

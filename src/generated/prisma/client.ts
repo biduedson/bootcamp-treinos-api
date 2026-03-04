@@ -60,6 +60,11 @@ export type WorkoutDay = Prisma.WorkoutDayModel
  */
 export type WorkoutExecise = Prisma.WorkoutExeciseModel
 /**
+ * Model WorkoutSession
+ * 
+ */
+export type WorkoutSession = Prisma.WorkoutSessionModel
+/**
  * Model Session
  * 
  */
