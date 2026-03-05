@@ -27,6 +27,7 @@ export type AggregateWorkoutPlan = {
 export type WorkoutPlanMinAggregateOutputType = {
   id: string | null
   name: string | null
+  coverImageUrl: string | null
   userId: string | null
   isActive: boolean | null
   createdAt: Date | null
@@ -36,6 +37,7 @@ export type WorkoutPlanMinAggregateOutputType = {
 export type WorkoutPlanMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  coverImageUrl: string | null
   userId: string | null
   isActive: boolean | null
   createdAt: Date | null
@@ -45,6 +47,7 @@ export type WorkoutPlanMaxAggregateOutputType = {
 export type WorkoutPlanCountAggregateOutputType = {
   id: number
   name: number
+  coverImageUrl: number
   userId: number
   isActive: number
   createdAt: number
@@ -56,6 +59,7 @@ export type WorkoutPlanCountAggregateOutputType = {
 export type WorkoutPlanMinAggregateInputType = {
   id?: true
   name?: true
+  coverImageUrl?: true
   userId?: true
   isActive?: true
   createdAt?: true
@@ -65,6 +69,7 @@ export type WorkoutPlanMinAggregateInputType = {
 export type WorkoutPlanMaxAggregateInputType = {
   id?: true
   name?: true
+  coverImageUrl?: true
   userId?: true
   isActive?: true
   createdAt?: true
@@ -74,6 +79,7 @@ export type WorkoutPlanMaxAggregateInputType = {
 export type WorkoutPlanCountAggregateInputType = {
   id?: true
   name?: true
+  coverImageUrl?: true
   userId?: true
   isActive?: true
   createdAt?: true
@@ -156,6 +162,7 @@ export type WorkoutPlanGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type WorkoutPlanGroupByOutputType = {
   id: string
   name: string
+  coverImageUrl: string | null
   userId: string
   isActive: boolean
   createdAt: Date
@@ -186,6 +193,7 @@ export type WorkoutPlanWhereInput = {
   NOT?: Prisma.WorkoutPlanWhereInput | Prisma.WorkoutPlanWhereInput[]
   id?: Prisma.StringFilter<"WorkoutPlan"> | string
   name?: Prisma.StringFilter<"WorkoutPlan"> | string
+  coverImageUrl?: Prisma.StringNullableFilter<"WorkoutPlan"> | string | null
   userId?: Prisma.StringFilter<"WorkoutPlan"> | string
   isActive?: Prisma.BoolFilter<"WorkoutPlan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"WorkoutPlan"> | Date | string
@@ -197,6 +205,7 @@ export type WorkoutPlanWhereInput = {
 export type WorkoutPlanOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -211,6 +220,7 @@ export type WorkoutPlanWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.WorkoutPlanWhereInput[]
   NOT?: Prisma.WorkoutPlanWhereInput | Prisma.WorkoutPlanWhereInput[]
   name?: Prisma.StringFilter<"WorkoutPlan"> | string
+  coverImageUrl?: Prisma.StringNullableFilter<"WorkoutPlan"> | string | null
   userId?: Prisma.StringFilter<"WorkoutPlan"> | string
   isActive?: Prisma.BoolFilter<"WorkoutPlan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"WorkoutPlan"> | Date | string
@@ -222,6 +232,7 @@ export type WorkoutPlanWhereUniqueInput = Prisma.AtLeast<{
 export type WorkoutPlanOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -237,6 +248,7 @@ export type WorkoutPlanScalarWhereWithAggregatesInput = {
   NOT?: Prisma.WorkoutPlanScalarWhereWithAggregatesInput | Prisma.WorkoutPlanScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"WorkoutPlan"> | string
   name?: Prisma.StringWithAggregatesFilter<"WorkoutPlan"> | string
+  coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"WorkoutPlan"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"WorkoutPlan"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"WorkoutPlan"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WorkoutPlan"> | Date | string
@@ -246,6 +258,7 @@ export type WorkoutPlanScalarWhereWithAggregatesInput = {
 export type WorkoutPlanCreateInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -256,6 +269,7 @@ export type WorkoutPlanCreateInput = {
 export type WorkoutPlanUncheckedCreateInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   userId: string
   isActive?: boolean
   createdAt?: Date | string
@@ -266,6 +280,7 @@ export type WorkoutPlanUncheckedCreateInput = {
 export type WorkoutPlanUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -276,6 +291,7 @@ export type WorkoutPlanUpdateInput = {
 export type WorkoutPlanUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -286,6 +302,7 @@ export type WorkoutPlanUncheckedUpdateInput = {
 export type WorkoutPlanCreateManyInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   userId: string
   isActive?: boolean
   createdAt?: Date | string
@@ -295,6 +312,7 @@ export type WorkoutPlanCreateManyInput = {
 export type WorkoutPlanUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,6 +321,7 @@ export type WorkoutPlanUpdateManyMutationInput = {
 export type WorkoutPlanUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -322,6 +341,7 @@ export type WorkoutPlanOrderByRelationAggregateInput = {
 export type WorkoutPlanCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -331,6 +351,7 @@ export type WorkoutPlanCountOrderByAggregateInput = {
 export type WorkoutPlanMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -340,6 +361,7 @@ export type WorkoutPlanMaxOrderByAggregateInput = {
 export type WorkoutPlanMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -410,6 +432,7 @@ export type WorkoutPlanUpdateOneRequiredWithoutWorkoutDaysNestedInput = {
 export type WorkoutPlanCreateWithoutUserInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -419,6 +442,7 @@ export type WorkoutPlanCreateWithoutUserInput = {
 export type WorkoutPlanUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -457,6 +481,7 @@ export type WorkoutPlanScalarWhereInput = {
   NOT?: Prisma.WorkoutPlanScalarWhereInput | Prisma.WorkoutPlanScalarWhereInput[]
   id?: Prisma.StringFilter<"WorkoutPlan"> | string
   name?: Prisma.StringFilter<"WorkoutPlan"> | string
+  coverImageUrl?: Prisma.StringNullableFilter<"WorkoutPlan"> | string | null
   userId?: Prisma.StringFilter<"WorkoutPlan"> | string
   isActive?: Prisma.BoolFilter<"WorkoutPlan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"WorkoutPlan"> | Date | string
@@ -466,6 +491,7 @@ export type WorkoutPlanScalarWhereInput = {
 export type WorkoutPlanCreateWithoutWorkoutDaysInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -475,6 +501,7 @@ export type WorkoutPlanCreateWithoutWorkoutDaysInput = {
 export type WorkoutPlanUncheckedCreateWithoutWorkoutDaysInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   userId: string
   isActive?: boolean
   createdAt?: Date | string
@@ -500,6 +527,7 @@ export type WorkoutPlanUpdateToOneWithWhereWithoutWorkoutDaysInput = {
 export type WorkoutPlanUpdateWithoutWorkoutDaysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -509,6 +537,7 @@ export type WorkoutPlanUpdateWithoutWorkoutDaysInput = {
 export type WorkoutPlanUncheckedUpdateWithoutWorkoutDaysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -518,6 +547,7 @@ export type WorkoutPlanUncheckedUpdateWithoutWorkoutDaysInput = {
 export type WorkoutPlanCreateManyUserInput = {
   id?: string
   name: string
+  coverImageUrl?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -526,6 +556,7 @@ export type WorkoutPlanCreateManyUserInput = {
 export type WorkoutPlanUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -535,6 +566,7 @@ export type WorkoutPlanUpdateWithoutUserInput = {
 export type WorkoutPlanUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -544,6 +576,7 @@ export type WorkoutPlanUncheckedUpdateWithoutUserInput = {
 export type WorkoutPlanUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -583,6 +616,7 @@ export type WorkoutPlanCountOutputTypeCountWorkoutDaysArgs<ExtArgs extends runti
 export type WorkoutPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  coverImageUrl?: boolean
   userId?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -595,6 +629,7 @@ export type WorkoutPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type WorkoutPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  coverImageUrl?: boolean
   userId?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -605,6 +640,7 @@ export type WorkoutPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type WorkoutPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  coverImageUrl?: boolean
   userId?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -615,13 +651,14 @@ export type WorkoutPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type WorkoutPlanSelectScalar = {
   id?: boolean
   name?: boolean
+  coverImageUrl?: boolean
   userId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WorkoutPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["workoutPlan"]>
+export type WorkoutPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "coverImageUrl" | "userId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["workoutPlan"]>
 export type WorkoutPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   workoutDays?: boolean | Prisma.WorkoutPlan$workoutDaysArgs<ExtArgs>
@@ -643,6 +680,7 @@ export type $WorkoutPlanPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    coverImageUrl: string | null
     userId: string
     isActive: boolean
     createdAt: Date
@@ -1074,6 +1112,7 @@ export interface Prisma__WorkoutPlanClient<T, Null = never, ExtArgs extends runt
 export interface WorkoutPlanFieldRefs {
   readonly id: Prisma.FieldRef<"WorkoutPlan", 'String'>
   readonly name: Prisma.FieldRef<"WorkoutPlan", 'String'>
+  readonly coverImageUrl: Prisma.FieldRef<"WorkoutPlan", 'String'>
   readonly userId: Prisma.FieldRef<"WorkoutPlan", 'String'>
   readonly isActive: Prisma.FieldRef<"WorkoutPlan", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"WorkoutPlan", 'DateTime'>

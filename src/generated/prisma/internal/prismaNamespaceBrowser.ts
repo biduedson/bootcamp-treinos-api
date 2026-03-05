@@ -93,6 +93,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const WorkoutPlanScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  coverImageUrl: 'coverImageUrl',
   userId: 'userId',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -109,6 +110,7 @@ export const WorkoutDayScalarFieldEnum = {
   isRest: 'isRest',
   weekDay: 'weekDay',
   estimatedDurationInSeconds: 'estimatedDurationInSeconds',
+  coverImageUrl: 'coverImageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
