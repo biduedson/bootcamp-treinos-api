@@ -2,9 +2,9 @@ import { fromNodeHeaders } from "better-auth/node";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 
-import { NotFoundError, WorkoutPlanSchema } from "../errors/intex.js";
+import { NotFoundError } from "../errors/intex.js";
 import { auth } from "../lib/auth.js";
-import { ErrorSchema } from "../schemas/index.js";
+import { ErrorSchema, WorkoutPlanSchema } from "../schemas/index.js";
 import { CreateWorkoutPlan } from "../usecases/CreateWorkoutPlan.js";
 
 export const workoutPlansRoutes = async (app: FastifyInstance) => {
