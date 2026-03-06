@@ -11,8 +11,8 @@ interface InputDto {
 
 interface OutputDto {
   id: string;
-  completedAt: string;
   startedAt: string;
+  completedAt: string;
 }
 
 export class UpdateWorkoutSession {
@@ -26,24 +26,18 @@ export class UpdateWorkoutSession {
     }
 
     const workoutDay = await prisma.workoutDay.findUnique({
-      where: {
-        id: dto.workoutDayId,
-        workoutPlanId: dto.workoutPlanId,
-      },
+      where: { id: dto.workoutDayId, workoutPlanId: dto.workoutPlanId },
     });
 
     if (!workoutDay) {
       throw new NotFoundError("Workout day not found");
     }
 
-    const Session = await prisma.workoutSession.findUnique({
-      where: {
-        id: dto.sessionId,
-        workoutDayId: dto.workoutDayId,
-      },
+    const session = await prisma.workoutSession.findUnique({
+      where: { id: dto.sessionId, workoutDayId: dto.workoutDayId },
     });
 
-    if (!Session) {
+    if (!session) {
       throw new NotFoundError("Workout session not found");
     }
 
@@ -54,8 +48,8 @@ export class UpdateWorkoutSession {
 
     return {
       id: updatedSession.id,
-      completedAt: updatedSession.startedAt.toISOString(),
-      startedAt: updatedSession.completedAt!.toISOString(),
+      startedAt: updatedSession.startedAt.toISOString(),
+      completedAt: updatedSession.completedAt!.toISOString(),
     };
   }
 }

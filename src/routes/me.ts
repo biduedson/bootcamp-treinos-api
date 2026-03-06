@@ -5,8 +5,8 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { auth } from "../lib/auth.js";
 import {
   ErrorSchema,
-  GetUserTrainDataResponseSchema,
   UpsertUserTrainDataBodySchema,
+  UpsertUserTrainDataSchema,
   UserTrainDataSchema,
 } from "../schemas/index.js";
 import { GetUserTrainData } from "../usecases/GetUserTrainData.js";
@@ -18,9 +18,9 @@ export const meRoutes = async (app: FastifyInstance) => {
     url: "/",
     schema: {
       tags: ["Me"],
-      summary: "Get current user train data",
+      summary: "Get user train data",
       response: {
-        200: GetUserTrainDataResponseSchema,
+        200: UserTrainDataSchema.nullable(),
         401: ErrorSchema,
         500: ErrorSchema,
       },
@@ -45,7 +45,6 @@ export const meRoutes = async (app: FastifyInstance) => {
         return reply.status(200).send(result);
       } catch (error) {
         app.log.error(error);
-
         return reply.status(500).send({
           error: "Internal server error",
           code: "INTERNAL_SERVER_ERROR",
@@ -56,13 +55,13 @@ export const meRoutes = async (app: FastifyInstance) => {
 
   app.withTypeProvider<ZodTypeProvider>().route({
     method: "PUT",
-    url: "/train-data",
+    url: "/",
     schema: {
       tags: ["Me"],
-      summary: "Create or update current user train data",
+      summary: "Upsert user train data",
       body: UpsertUserTrainDataBodySchema,
       response: {
-        200: UserTrainDataSchema,
+        200: UpsertUserTrainDataSchema,
         401: ErrorSchema,
         500: ErrorSchema,
       },
@@ -91,7 +90,6 @@ export const meRoutes = async (app: FastifyInstance) => {
         return reply.status(200).send(result);
       } catch (error) {
         app.log.error(error);
-
         return reply.status(500).send({
           error: "Internal server error",
           code: "INTERNAL_SERVER_ERROR",

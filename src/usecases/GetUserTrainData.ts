@@ -15,20 +15,30 @@ interface OutputDto {
 
 export class GetUserTrainData {
   async execute(dto: InputDto): Promise<OutputDto | null> {
-    const trainData = await prisma.userTrainData.findUnique({
-      where: { userId: dto.userId },
-      include: { user: { select: { name: true } } },
+    const user = await prisma.user.findUnique({
+      where: { id: dto.userId },
     });
 
-    if (!trainData) return null;
+    if (!user) {
+      return null;
+    }
+
+    if (
+      user.weightInGrams === null ||
+      user.heightInCentimeters === null ||
+      user.age === null ||
+      user.bodyFatPercentage === null
+    ) {
+      return null;
+    }
 
     return {
-      userId: trainData.userId,
-      userName: trainData.user.name,
-      weightInGrams: trainData.weightInGrams,
-      heightInCentimeters: trainData.heightInCentimeters,
-      age: trainData.age,
-      bodyFatPercentage: trainData.bodyFatPercentage,
+      userId: user.id,
+      userName: user.name,
+      weightInGrams: user.weightInGrams,
+      heightInCentimeters: user.heightInCentimeters,
+      age: user.age,
+      bodyFatPercentage: user.bodyFatPercentage,
     };
   }
 }

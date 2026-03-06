@@ -1,7 +1,7 @@
 import {
   NotFoundError,
-  WorkoutPlanNotActiveError,
   SessionAlreadyStartedError,
+  WorkoutPlanNotActiveError,
 } from "../errors/intex.js";
 import { prisma } from "../lib/db.js";
 
@@ -12,7 +12,7 @@ interface InputDto {
 }
 
 interface OutputDto {
-  workoutSessionId: string;
+  userWorkoutSessionId: string;
 }
 
 export class StartWorkoutSession {
@@ -34,15 +34,13 @@ export class StartWorkoutSession {
     }
 
     const workoutDay = await prisma.workoutDay.findUnique({
-      where: {
-        id: dto.workoutDayId,
-        workoutPlanId: dto.workoutPlanId,
-      },
+      where: { id: dto.workoutDayId, workoutPlanId: dto.workoutPlanId },
     });
 
     if (!workoutDay) {
       throw new NotFoundError("Workout day not found");
     }
+
     const existingSession = await prisma.workoutSession.findFirst({
       where: { workoutDayId: dto.workoutDayId },
     });
@@ -61,7 +59,7 @@ export class StartWorkoutSession {
     });
 
     return {
-      workoutSessionId: session.id,
+      userWorkoutSessionId: session.id,
     };
   }
 }

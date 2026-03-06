@@ -2,10 +2,10 @@ import { NotFoundError } from "../errors/intex.js";
 import { WeekDay } from "../generated/prisma/enums.js";
 import { prisma } from "../lib/db.js";
 
-export interface InputDto {
+// Data Transfer Object
+interface InputDto {
   userId: string;
   name: string;
-  coverImageUrl?: string;
   workoutDays: Array<{
     name: string;
     weekDay: WeekDay;
@@ -22,10 +22,9 @@ export interface InputDto {
   }>;
 }
 
-export interface OutputDto {
+interface OutputDto {
   id: string;
   name: string;
-  coverImageUrl?: string;
   workoutDays: Array<{
     name: string;
     weekDay: WeekDay;
@@ -46,11 +45,10 @@ export class CreateWorkoutPlan {
   async execute(dto: InputDto): Promise<OutputDto> {
     const existingWorkoutPlan = await prisma.workoutPlan.findFirst({
       where: {
-        userId: dto.userId,
         isActive: true,
       },
     });
-
+    // Transaction - Atomicidade
     return prisma.$transaction(async (tx) => {
       if (existingWorkoutPlan) {
         await tx.workoutPlan.update({
@@ -62,7 +60,6 @@ export class CreateWorkoutPlan {
         data: {
           id: crypto.randomUUID(),
           name: dto.name,
-          coverImageUrl: dto.coverImageUrl,
           userId: dto.userId,
           isActive: true,
           workoutDays: {
@@ -74,8 +71,8 @@ export class CreateWorkoutPlan {
               coverImageUrl: workoutDay.coverImageUrl,
               exercises: {
                 create: workoutDay.exercises.map((exercise) => ({
-                  order: exercise.order,
                   name: exercise.name,
+                  order: exercise.order,
                   sets: exercise.sets,
                   reps: exercise.reps,
                   restTimeInSeconds: exercise.restTimeInSeconds,
@@ -85,7 +82,6 @@ export class CreateWorkoutPlan {
           },
         },
       });
-
       const result = await tx.workoutPlan.findUnique({
         where: { id: workoutPlan.id },
         include: {
@@ -96,18 +92,15 @@ export class CreateWorkoutPlan {
           },
         },
       });
-
       if (!result) {
         throw new NotFoundError("Workout plan not found");
       }
-
       return {
         id: result.id,
         name: result.name,
-        coverImageUrl: result.coverImageUrl ?? undefined,
         workoutDays: result.workoutDays.map((day) => ({
           name: day.name,
-          weekDay: day.weekDay as WeekDay,
+          weekDay: day.weekDay,
           isRest: day.isRest,
           estimatedDurationInSeconds: day.estimatedDurationInSeconds,
           coverImageUrl: day.coverImageUrl ?? undefined,

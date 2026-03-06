@@ -18,16 +18,9 @@ interface OutputDto {
 
 export class UpsertUserTrainData {
   async execute(dto: InputDto): Promise<OutputDto> {
-    const trainData = await prisma.userTrainData.upsert({
-      where: { userId: dto.userId },
-      update: {
-        weightInGrams: dto.weightInGrams,
-        heightInCentimeters: dto.heightInCentimeters,
-        age: dto.age,
-        bodyFatPercentage: dto.bodyFatPercentage,
-      },
-      create: {
-        userId: dto.userId,
+    const user = await prisma.user.update({
+      where: { id: dto.userId },
+      data: {
         weightInGrams: dto.weightInGrams,
         heightInCentimeters: dto.heightInCentimeters,
         age: dto.age,
@@ -36,11 +29,11 @@ export class UpsertUserTrainData {
     });
 
     return {
-      userId: trainData.userId,
-      weightInGrams: trainData.weightInGrams,
-      heightInCentimeters: trainData.heightInCentimeters,
-      age: trainData.age,
-      bodyFatPercentage: trainData.bodyFatPercentage,
+      userId: user.id,
+      weightInGrams: user.weightInGrams!,
+      heightInCentimeters: user.heightInCentimeters!,
+      age: user.age!,
+      bodyFatPercentage: user.bodyFatPercentage!,
     };
   }
 }

@@ -10,14 +10,15 @@ import {
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-import { z } from "zod/v4";
+import z from "zod";
 
 import { auth } from "./lib/auth.js";
 import { aiRoutes } from "./routes/ai.js";
 import { homeRoutes } from "./routes/home.js";
 import { meRoutes } from "./routes/me.js";
 import { statsRoutes } from "./routes/stats.js";
-import { workoutPlansRoutes } from "./routes/workout-plan.js";
+import { workoutPlanRoutes } from "./routes/workout-plan.js";
+
 const app = Fastify({
   logger: true,
 });
@@ -29,7 +30,7 @@ await app.register(fastifySwagger, {
   openapi: {
     info: {
       title: "Bootcamp Treinos API",
-      description: "API para o Bootcamp Treinos do FSC",
+      description: "API para o bootcamp de treinos do FSC",
       version: "1.0.0",
     },
     servers: [
@@ -47,18 +48,49 @@ await app.register(fastifyCors, {
   credentials: true,
 });
 
-//Routes
-await app.register(aiRoutes, { prefix: "/ai" });
+await app.register(fastifyApiReference, {
+  routePrefix: "/docs",
+  configuration: {
+    sources: [
+      {
+        title: "Bootcamp Treinos API",
+        slug: "bootcamp-treinos-api",
+        url: "/swagger.json",
+      },
+      {
+        title: "Auth API",
+        slug: "auth-api",
+        url: "/api/auth/open-api/generate-schema",
+      },
+    ],
+  },
+});
+
+// RESTful
+// Routes
 await app.register(homeRoutes, { prefix: "/home" });
 await app.register(meRoutes, { prefix: "/me" });
 await app.register(statsRoutes, { prefix: "/stats" });
-await app.register(workoutPlansRoutes, { prefix: "/workout-plans" });
+await app.register(workoutPlanRoutes, { prefix: "/workout-plans" });
+await app.register(aiRoutes, { prefix: "/ai" });
+
+app.withTypeProvider<ZodTypeProvider>().route({
+  method: "GET",
+  url: "/swagger.json",
+  schema: {
+    hide: true,
+  },
+  handler: async () => {
+    return app.swagger();
+  },
+});
+
 app.withTypeProvider<ZodTypeProvider>().route({
   method: "GET",
   url: "/",
   schema: {
-    description: "Hello World",
-    tags: ["hello world"],
+    description: "Hello world",
+    tags: ["Hello World"],
     response: {
       200: z.object({
         message: z.string(),
@@ -107,29 +139,8 @@ app.route({
   },
 });
 
-app.get("/swagger.json", (request, reply) => {
-  reply.send(app.swagger());
-});
-await app.register(fastifyApiReference, {
-  routePrefix: "/docs",
-  configuration: {
-    sources: [
-      {
-        title: "Bootcamp Treinos API",
-        slug: "bootcamp-treinos-api",
-        url: "/swagger.json",
-      },
-      {
-        title: "Auth API",
-        slug: "auth-api",
-        url: "/api/auth/open-api/generate-schema",
-      },
-    ],
-  },
-});
-
 try {
-  await app.listen({ port: Number(process.env.PORT) || 8082 });
+  await app.listen({ port: Number(process.env.PORT) || 8081 });
 } catch (err) {
   app.log.error(err);
   process.exit(1);
