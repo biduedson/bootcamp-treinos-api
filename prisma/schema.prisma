@@ -14,32 +14,34 @@ datasource db {
 }
 
 model User {
-  id            String          @id
-  workoutPlans  WorkoutPlan[]
-  name          String
-  email         String
-  emailVerified Boolean         @default(false)
-  image         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  trainData     UserTrainData?
+  id                  String        @id
+  workoutPlans        WorkoutPlan[]
+  name                String
+  email               String
+  emailVerified       Boolean       @default(false)
+  image               String?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  sessions            Session[]
+  accounts            Account[]
+  weightInGrams       Int?
+  heightInCentimeters Int?
+  age                 Int?
+  bodyFatPercentage   Int? // 100 representa 100% 
 
   @@unique([email])
   @@map("user")
 }
 
 model WorkoutPlan {
-  id             String       @id @default(uuid())
-  name           String
-  coverImageUrl  String?
-  userId         String
-  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  workoutDays    WorkoutDay[]
-  isActive       Boolean      @default(true)
-  createdAt      DateTime     @default(now()) @db.Timestamptz()
-  updatedAt      DateTime     @updatedAt @db.Timestamptz()
+  id          String       @id @default(uuid())
+  name        String
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workoutDays WorkoutDay[]
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @db.Timestamptz()
+  updatedAt   DateTime     @updatedAt @db.Timestamptz()
 }
 
 enum WeekDay {
@@ -53,21 +55,21 @@ enum WeekDay {
 }
 
 model WorkoutDay {
-  id                         String           @id @default(uuid())
+  id                         String            @id @default(uuid())
   name                       String
   workoutPlanId              String
-  workoutPlan                WorkoutPlan      @relation(fields: [workoutPlanId], references: [id], onDelete: Cascade)
-  isRest                     Boolean          @default(false)
+  workoutPlan                WorkoutPlan       @relation(fields: [workoutPlanId], references: [id], onDelete: Cascade)
+  isRest                     Boolean           @default(false)
   weekDay                    WeekDay
-  exercises                  WorkoutExecise[]
+  exercises                  WorkoutExercise[]
   estimatedDurationInSeconds Int
   coverImageUrl              String?
-  createdAt                  DateTime         @default(now()) @db.Timestamptz()
-  updatedAt                  DateTime         @updatedAt @db.Timestamptz()
+  createdAt                  DateTime          @default(now()) @db.Timestamptz()
+  updatedAt                  DateTime          @updatedAt @db.Timestamptz()
   sessions                   WorkoutSession[]
 }
 
-model WorkoutExecise {
+model WorkoutExercise {
   id                String     @id @default(uuid())
   name              String
   order             Int
@@ -88,18 +90,6 @@ model WorkoutSession {
   completedAt  DateTime?  @db.Timestamptz()
   createdAt    DateTime   @default(now()) @db.Timestamptz()
   updatedAt    DateTime   @updatedAt @db.Timestamptz()
-}
-
-model UserTrainData {
-  id                  String   @id @default(uuid())
-  userId              String   @unique
-  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  weightInGrams       Int
-  heightInCentimeters Int
-  age                 Int
-  bodyFatPercentage   Float
-  createdAt           DateTime @default(now()) @db.Timestamptz()
-  updatedAt           DateTime @updatedAt @db.Timestamptz()
 }
 
 model Session {
